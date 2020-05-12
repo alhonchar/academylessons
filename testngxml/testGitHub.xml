@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite2" parallel="false">
+    <test name="Test2">
+        <classes>
+            <class name="org.academy.devHalimanEvgenii.tests.AuthenticationTest" />
+        </classes>
+    </test>
+
+</suite>
