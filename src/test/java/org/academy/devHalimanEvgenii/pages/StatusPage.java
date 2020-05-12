@@ -8,15 +8,13 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class StatusPage {
+public class StatusPage extends ParentPage {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
 
     public StatusPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10, 50);
+        super(driver);
     }
+
     public boolean isTitleStatusPagePresent() {
         return wait.until(ExpectedConditions.titleIs("GitHub Status"));
 

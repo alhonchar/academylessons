@@ -7,17 +7,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ApiPage {
+public class ApiPage extends ParentPage {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+
     @FindBy(xpath = "//h1")
     private WebElement h1Tag;
 
     public ApiPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10, 50);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public boolean isDescriptionApiPagePresent() {

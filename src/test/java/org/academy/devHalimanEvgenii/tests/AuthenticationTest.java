@@ -4,7 +4,6 @@ import org.academy.devHalimanEvgenii.listener.AuthListener;
 import org.academy.devHalimanEvgenii.pages.TitlePageGitHub;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -12,10 +11,10 @@ import java.util.concurrent.TimeUnit;
 
 @Listeners(AuthListener.class)
 public class AuthenticationTest {
-    protected WebDriver driver;
-    protected TitlePageGitHub titlePageGitHub;
-    protected final String CORECT_LOGIN = "alhonchar";
-    protected final String CORECT_PASSWORD = "Alex123456&*";
+    private WebDriver driver;
+    private TitlePageGitHub titlePageGitHub;
+    public static final String CORECT_LOGIN = "alhonchar";
+    public static final String CORECT_PASSWORD = "Alex123456&*";
 
 
     @Test(description = "validation for a successful scenario")
@@ -76,7 +75,11 @@ public class AuthenticationTest {
 
     @BeforeClass(alwaysRun = true)
     public void browserSetup() {
+        findOutOS();
+        driver = new ChromeDriver();
         titlePageGitHub = new TitlePageGitHub(driver);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @AfterMethod(alwaysRun = true)
@@ -84,7 +87,7 @@ public class AuthenticationTest {
         driver.manage().deleteAllCookies();
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void browserTearDown() {
         driver.quit();
         driver = null;
@@ -94,21 +97,15 @@ public class AuthenticationTest {
     public void methodSetup() {
         driver.manage().deleteAllCookies();
     }
-    @BeforeTest(alwaysRun = true)
-    public void setUp() {
-        findOutOS();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    }
-    public void findOutOS(){
-        if(System.getProperty("os.name").equals("Linux")){
+
+    public static void findOutOS() {
+        if (System.getProperty("os.name").equals("Linux")) {
             System.setProperty("webdriver.chrome.driver", "src/test/java/org/academy/devHalimanEvgenii/chromedriver_linux64/chromedriver");
-        }
-        else {
+        } else {
             System.setProperty(
                     "webdriver.chrome.driver",
-                    "С:\\selenium\\chromedriver.exe");}
+                    "С:\\selenium\\chromedriver.exe");
+        }
     }
 
 }

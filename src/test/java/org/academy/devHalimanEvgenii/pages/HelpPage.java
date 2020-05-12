@@ -7,18 +7,16 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HelpPage {
+public class HelpPage extends ParentPage {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+
     @FindBy(xpath = "//h1")
     private WebElement h1Tag;
 
     public HelpPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10, 50);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
+
     public boolean isDescriptionHelpPagePresent() {
         return wait.until(ExpectedConditions.visibilityOf(h1Tag))
                 .getText().contains("Need help?");

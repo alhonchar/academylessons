@@ -7,18 +7,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BlogPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class BlogPage extends ParentPage {
 
     @FindBy(xpath = "//h1")
     private WebElement h1Tag;
 
     public BlogPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10, 50);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
+
     public boolean isDescriptionBlogPagePresent() {
         return wait.until(ExpectedConditions.visibilityOf(h1Tag))
                 .getText().contains("The GitHub Blog");

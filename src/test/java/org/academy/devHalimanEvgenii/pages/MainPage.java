@@ -7,9 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MainPage {
-    private  WebDriver driver;
-    private WebDriverWait wait;
+public class MainPage extends ParentPage {
 
     @FindBy(linkText = "Blog")
     private WebElement blogLink;
@@ -37,59 +35,66 @@ public class MainPage {
     private WebElement helpLink;
 
 
-
-
     public MainPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10, 50);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
-    public AboutPage clickOnAboutLink(){
+    public AboutPage clickOnAboutLink() {
         wait.until(ExpectedConditions.elementToBeClickable(aboutLink)).click();
         return new AboutPage(driver);
     }
-    public ApiPage clickOnAPILink(){
+
+    public ApiPage clickOnAPILink() {
         wait.until(ExpectedConditions.elementToBeClickable(apiLink)).click();
         return new ApiPage(driver);
     }
-    public BlogPage clickOnBlogLink(){
+
+    public BlogPage clickOnBlogLink() {
         wait.until(ExpectedConditions.elementToBeClickable(blogLink)).click();
         return new BlogPage(driver);
     }
-    public ContactGitHubPage clickOnContactLink(){
+
+    public ContactGitHubPage clickOnContactLink() {
         wait.until(ExpectedConditions.elementToBeClickable(contactGitHubLink)).click();
         return new ContactGitHubPage(driver);
     }
-    public HelpPage clickOnHelpLink(){
+
+    public HelpPage clickOnHelpLink() {
         wait.until(ExpectedConditions.elementToBeClickable(helpLink)).click();
         return new HelpPage(driver);
     }
-    public PricingPage clickOnPricingLink(){
+
+    public PricingPage clickOnPricingLink() {
         wait.until(ExpectedConditions.elementToBeClickable(pricingLink)).click();
         return new PricingPage(driver);
     }
-    public PrivacyPage clickOnPrivacyLink(){
+
+    public PrivacyPage clickOnPrivacyLink() {
         wait.until(ExpectedConditions.elementToBeClickable(privacyLink)).click();
         return new PrivacyPage(driver);
     }
-    public SecurityPage clickOnSecurityLink(){
+
+    public SecurityPage clickOnSecurityLink() {
         wait.until(ExpectedConditions.elementToBeClickable(securityLink)).click();
         return new SecurityPage(driver);
     }
-    public ShopPage clickOnShopLink(){
+
+    public ShopPage clickOnShopLink() {
         wait.until(ExpectedConditions.elementToBeClickable(shopLink)).click();
         return new ShopPage(driver);
     }
-    public StatusPage clickOnStatusLink(){
+
+    public StatusPage clickOnStatusLink() {
         wait.until(ExpectedConditions.elementToBeClickable(statusLink)).click();
         return new StatusPage(driver);
     }
-    public TermsPage clickOnTermsLink(){
+
+    public TermsPage clickOnTermsLink() {
         wait.until(ExpectedConditions.elementToBeClickable(termsLink)).click();
         return new TermsPage(driver);
     }
-    public TrainingPage clickOnTrainingLink(){
+
+    public TrainingPage clickOnTrainingLink() {
         wait.until(ExpectedConditions.elementToBeClickable(trainingLink)).click();
         return new TrainingPage(driver);
     }

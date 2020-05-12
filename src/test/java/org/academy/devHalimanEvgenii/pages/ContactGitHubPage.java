@@ -7,17 +7,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ContactGitHubPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class ContactGitHubPage extends ParentPage {
+
     @FindBy(xpath = "//h1")
     private WebElement h1Tag;
 
     public ContactGitHubPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10, 50);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
+
     public boolean isDescriptionContactPagePresent() {
         return wait.until(ExpectedConditions.visibilityOf(h1Tag))
                 .getText().contains("what can we help with?");

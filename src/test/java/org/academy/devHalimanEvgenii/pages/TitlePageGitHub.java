@@ -11,10 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 
-public class TitlePageGitHub {
+public class TitlePageGitHub extends ParentPage {
     private static final String HOMEPAGE_URL = "https://github.com/";
-    private  WebDriver driver;
-    private  WebDriverWait wait;
+
     @FindBy(xpath = "//a[@href='/login']")
     private WebElement signInLink;
     @FindBy(id = "login_field")
@@ -30,39 +29,41 @@ public class TitlePageGitHub {
 
 
     public TitlePageGitHub(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10, 50);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
-    public TitlePageGitHub openPage(){
+    public TitlePageGitHub openPage() {
         driver.get(HOMEPAGE_URL);
         return this;
     }
-    public TitlePageGitHub clickOnSignInLink(){
+
+    public TitlePageGitHub clickOnSignInLink() {
         wait.until(ExpectedConditions.elementToBeClickable(signInLink)).click();
         return this;
     }
-    public TitlePageGitHub insertInLoginField(String login){
+
+    public TitlePageGitHub insertInLoginField(String login) {
         wait.until(ExpectedConditions.visibilityOf(userNameInput)).sendKeys(login);
         return this;
     }
-    public TitlePageGitHub insertInPasswordField(String password){
+
+    public TitlePageGitHub insertInPasswordField(String password) {
         passwordInput.sendKeys(password);
         return this;
     }
-    public TitlePageGitHub clickONConfirmButton(){
+
+    public TitlePageGitHub clickONConfirmButton() {
         signInButton.click();
         return this;
     }
-    public boolean repositoryLinkIsPresense(){
-         return wait.until(ExpectedConditions.visibilityOf(repositoryLinks.get(0))).isDisplayed();
+
+    public boolean repositoryLinkIsPresense() {
+        return wait.until(ExpectedConditions.visibilityOf(repositoryLinks.get(0))).isDisplayed();
     }
+
     public boolean errorMessageIsDisplay() {
         return wait.until(ExpectedConditions.visibilityOf(errorMessage)).isDisplayed();
     }
-
-
 
 
 }

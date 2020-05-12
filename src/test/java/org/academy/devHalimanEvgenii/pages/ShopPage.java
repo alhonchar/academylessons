@@ -7,17 +7,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ShopPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class ShopPage extends ParentPage {
+
     @FindBy(xpath = "//h1[@class='site-header__logo']")
     private WebElement h1Tag;
 
     public ShopPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10, 50);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
+
     public boolean isDescriptionShopPagePresent() {
         return wait.until(ExpectedConditions.visibilityOf(h1Tag))
                 .isDisplayed();

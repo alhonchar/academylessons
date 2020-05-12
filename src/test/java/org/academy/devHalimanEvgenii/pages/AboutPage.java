@@ -7,22 +7,18 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AboutPage {
+public class AboutPage extends ParentPage {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+
     @FindBy(xpath = "//h1")
     private WebElement h1Tag;
 
 
-
     public AboutPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10, 50);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
-    public boolean isDescriptionPagePresent(){
+    public boolean isDescriptionPagePresent() {
         return wait.until(ExpectedConditions.visibilityOf(h1Tag))
                 .getText().contains("is how people build software");
     }

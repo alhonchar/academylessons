@@ -3,6 +3,7 @@
     <test name="Test2">
         <classes>
             <class name="org.academy.devHalimanEvgenii.tests.AuthenticationTest" />
+            <class name="org.academy.devHalimanEvgenii.tests.FooterLinksTest" />
         </classes>
     </test>
 
