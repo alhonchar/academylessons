@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Test1 {
     private static Logger log = LoggerFactory.getLogger(Test1.class);
+    public WebDriver driver;
 
     @DataProvider(name = "login")
     public Object[][] dataProviderTest() {
@@ -29,7 +30,7 @@ public class Test1 {
         };
     }
     @BeforeMethod
-    public WebDriver browser(){
+    public void browser(){
         try
         {if (System.getProperty("os.name").toLowerCase().contains("win")) System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         else if (System.getProperty("os.name").toLowerCase().contains("linux"))System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
@@ -37,29 +38,29 @@ public class Test1 {
         catch (Exception e){
         log.error("unsupported os detected");
         }
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         log.info("browser was started");
-        return driver;
     }
 
     @AfterMethod
     public void close(){
-        browser().quit();
+        driver.quit();
         log.info("browser was closed after test ended");
     }
 
     @Test(dataProvider = "login")
     public void loginTest(String login, String password, boolean accessStatus){
         log.info("LoginTest started with parameters: login -'{}', password - '{}'", login, password);
-        WebDriverWait wait = new WebDriverWait(browser(), 10, 500);
-        browser().get("https://github.com/login");
-        try{wait.until(ExpectedConditions.visibilityOf(browser().findElement(By.xpath("//input[@name='login']")))).sendKeys(login);}
+        WebDriverWait wait = new WebDriverWait(driver, 10, 500);
+        driver.get("https://github.com/login");
+        try{wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@name='login']")))).sendKeys(login);}
         catch (NoSuchElementException e) {log.error("login field didn't found");}
-        try{wait.until(ExpectedConditions.visibilityOf(browser().findElement(By.xpath("//input[@name='password']")))).sendKeys(password);}
+        try{wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@name='password']")))).sendKeys(password);}
         catch (NoSuchElementException e) {log.error("password field didn't found");}
-        try{wait.until(ExpectedConditions.elementToBeClickable(browser().findElement(By.xpath("//input[@name='commit']")))).click();}
+        try{wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//input[@name='commit']")))).click();}
         catch (NoSuchElementException e) {log.error("commit button didn't found");}
-        Assert.assertEquals((wait.until(ExpectedConditions.visibilityOf(browser().findElement(By.xpath("//strong[@class='css-truncate-target']")))).getText()=="alhonchar"), accessStatus);
+        String user = driver.findElement(By.xpath("//a[@role='menuitem']//strong[@class='css-truncate-target']")).getText();;
+        Assert.assertEquals((user.contains("alhonchar")), accessStatus);
     }
 }
