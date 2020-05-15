@@ -3,12 +3,14 @@ package org.academy.web;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Objects;
 
 @Slf4j
 public class AbstractPage {
     public final WebDriver webDriver;
+    protected WebDriverWait wait;
 
     public AbstractPage(WebDriver webDriver, boolean navigateToPage, String navigateToPageUrl) {
         this.webDriver = webDriver;
@@ -17,6 +19,11 @@ public class AbstractPage {
             webDriver.get(navigateToPageUrl);
             WebHelpers.refreshPage(webDriver);
         }
+    }
 
+    public AbstractPage(WebDriver webDriver) {
+        this.webDriver = webDriver;
+        PageFactory.initElements(webDriver, this);
+        wait = new WebDriverWait(webDriver, 10, 50);
     }
 }

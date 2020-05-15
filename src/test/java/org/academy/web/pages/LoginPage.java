@@ -32,9 +32,9 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
-    public LoginPage clickOnSubmit() {
+    public AuthPage clickOnSubmit() {
         submitForm.click();
-        return this;
+        return new AuthPage(webDriver);
     }
 
     public String getErrorMessage() {
