@@ -3,6 +3,7 @@ package org.academy.web;
 import lombok.extern.slf4j.Slf4j;
 import org.academy.TestConfigurations;
 import org.academy.utils.web.WebHelpers;
+import org.academy.utils.web.elements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,7 +18,7 @@ public class AbstractPage {
 
     public AbstractPage(WebDriver webDriver, boolean navigateToPage, String navigateToPageUrl) {
         this.webDriver = webDriver;
-        PageFactory.initElements(webDriver, this);
+        PageFactory.initElements(new ExtendedFieldDecorator(webDriver), this);
         if (navigateToPage && !Objects.equals(webDriver.getCurrentUrl(), navigateToPageUrl)) {
             webDriver.get(navigateToPageUrl);
             WebHelpers.refreshPage(webDriver);
