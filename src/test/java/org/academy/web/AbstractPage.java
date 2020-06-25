@@ -30,7 +30,7 @@ public class AbstractPage {
         this.webDriver = webDriver;
         webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
-        PageFactory.initElements(webDriver, this);
+        PageFactory.initElements(new ExtendedFieldDecorator(webDriver), this);
         if (navigateToPage && !Objects.equals(webDriver.getCurrentUrl(), pageUrl)) {
             webDriver.get(pageUrl);
             WebHelpers.refreshPage(webDriver);
@@ -39,7 +39,7 @@ public class AbstractPage {
 
     public AbstractPage(WebDriver webDriver) {
         this.webDriver = webDriver;
-        PageFactory.initElements(webDriver, this);
+        PageFactory.initElements(new ExtendedFieldDecorator(webDriver), this);
         wait = new WebDriverWait(webDriver, 10, 50);
     }
 }

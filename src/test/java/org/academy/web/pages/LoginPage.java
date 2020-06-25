@@ -6,7 +6,6 @@ import org.academy.utils.web.elements.elements.Message;
 import org.academy.utils.web.elements.elements.TextField;
 import org.academy.web.AbstractPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends AbstractPage {
