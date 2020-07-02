@@ -21,7 +21,7 @@ public class GetRequests {
             RestAssured.baseURI = TestConfigurations.getApiUri();
             return given()
                     .relaxedHTTPSValidation()
-                    .auth().oauth2(token)
+                    .auth().basic("alhonchar", token)
                     .contentType(ContentType.JSON)
                     .header("Accept", "application/vnd.github.v3+json")
                     .when()
