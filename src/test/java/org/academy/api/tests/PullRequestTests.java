@@ -9,8 +9,6 @@ public class PullRequestTests {
 
     @Test
     public void getAllPullRequests() {
-        pullRequestRequests.getAllPRRequest(TestConfigurations.getApiToken1()
-                + TestConfigurations.getApiToken2()
-                + TestConfigurations.getApiToken3(), 200);
+        pullRequestRequests.getAllPRRequest(TestConfigurations.getApiToken(), 200);
     }
 }
